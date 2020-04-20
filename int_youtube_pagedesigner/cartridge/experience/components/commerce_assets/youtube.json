@@ -1,0 +1,51 @@
+{
+    "name": "YouTube",
+    "description": "YouTube component",
+    "group": "commerce_assets",
+    "attribute_definition_groups": [
+    {
+      "id": "displayInformation",
+      "name": "General Information",
+      "attribute_definitions": [
+        {
+          "id": "sectionTitle",
+          "name": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "id": "sectionSubtitle",
+          "name": "Subtitle",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "dataType",
+          "name": "Type of Display",
+          "required": true,
+          "type": "enum",
+          "values": [
+            "video",
+            "playlist"
+          ]
+        },
+        {
+          "id": "videoID",
+          "name": "Video ID",
+          "description": "If this is for a single video, enter the Video ID here.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "playlistID",
+          "name": "Playlist ID",
+          "description": "If this is a playlist, enter the Playlist ID here for videos.",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}
+
