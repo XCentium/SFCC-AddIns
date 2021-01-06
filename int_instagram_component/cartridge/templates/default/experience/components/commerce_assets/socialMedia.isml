@@ -1,0 +1,20 @@
+<iscache type="relative" hour="24"/>
+
+
+<div class="instagram_posts">
+    <isloop items="${pdict.instafeed}" status="loopcount" var="instaimg">
+        <isif condition="${instaimg.media_type == 'IMAGE'}">
+            <div>
+                <img class="img-fluid" src="${instaimg.img}" title="${instaimg.caption}" alt="${instaimg.caption}"/>
+            </div>
+        </isif>
+        <isif condition="${instaimg.media_type == 'VIDEO'}">
+            <div>
+            <video class="img-fluid" controls>
+                <source src="${instaimg.img}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </div>
+        </isif>
+    </isloop>
+</div>
