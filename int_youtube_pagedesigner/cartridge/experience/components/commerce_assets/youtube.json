@@ -30,6 +30,54 @@
           ]
         },
         {
+          "id": "isAutoplay",
+          "name": "Autoplay Video",
+          "required": false,
+          "type": "boolean",
+          "description": "Autoplay video on page load",
+          "default_value": false
+        },
+        {
+          "id": "isLoop",
+          "name": "Loop Video",
+          "required": false,
+          "type": "boolean",
+          "default_value": false,
+          "description": "Loop video after playing"
+        },
+        {
+          "id": "isControls",
+          "name": "Show Controls",
+          "required": false,
+          "type": "boolean",
+          "default_value": true,
+          "description": "Show controls on the video?"
+        },
+        {
+          "id": "setHeight",
+          "name": "Video Height",
+          "required": false,
+          "type": "string",
+          "description": "This can be set in px or %",
+          "default_value": "480px"
+        },
+        {
+          "id": "setWidth",
+          "name": "Video Width",
+          "required": false,
+          "type": "string",
+          "default_value": "640px",
+          "description": "This can be set in px or %"
+        },
+        {
+          "id": "isFullSize",
+          "name": "Make this video fit the full width of the area.",
+          "required": false,
+          "type": "boolean",
+          "default_value": true,
+          "description": "If enabled, the video will ignore the width/height settings and will fit the full width of the area it's inside of."
+        },
+        {
           "id": "videoID",
           "name": "Video ID",
           "description": "If this is for a single video, enter the Video ID here.",

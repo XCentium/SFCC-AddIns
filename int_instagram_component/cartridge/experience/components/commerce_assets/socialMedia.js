@@ -30,6 +30,7 @@ module.exports.render = function(context) {
   var model = new HashMap();
 
   model.instafeed = feedDisplay;
+  model.title = content.instaTitle || null;
 
   return new Template('experience/components/commerce_assets/socialMedia').render(model).text;
 };

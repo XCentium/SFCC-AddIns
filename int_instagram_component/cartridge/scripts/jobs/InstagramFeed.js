@@ -8,9 +8,6 @@ var InstagramService = require('~/cartridge/services/InstagramService');
 
 module.exports = {
   getInstagramPosts: function() {
-    var clientID = Site.current.getCustomPreferenceValue('instaAppID');
-    var clientSecret = Site.current.getCustomPreferenceValue('instaClientSecret');
-    var userid = Site.current.getCustomPreferenceValue('instaUserID');
     var longToken = Site.current.getCustomPreferenceValue('instaLongToken');
     var mediaFields = Site.current.getCustomPreferenceValue('instaMediaFields');
     var theDay;
@@ -36,7 +33,6 @@ module.exports = {
       var mediaArgs = new dw.util.HashMap();
       mediaArgs.put('fields', mediaFields);
       mediaArgs.put('access_token', token);
-      mediaArgs.put('userid', userid);
       var response;
       var instagramPosts = InstagramService.getMedia.call(mediaArgs);
 
@@ -64,7 +60,15 @@ module.exports = {
     var thePosts = getMedia(longToken);
 
     // write the posts to the Custom Object
-    var currentPosts = CustomObjectMgr.getCustomObject('socialMedia','instagram');
+    try{
+      var currentPosts = CustomObjectMgr.getCustomObject('socialMedia','instagram');
+
+    } catch(e){
+    //if object is not there, create it
+      if (!currentPosts){
+        var currentPosts = CustomObjectMgr.createCustomObject('socialMedia','instagram');
+      }
+    }
 
     //if object is not there, create it
     if (!currentPosts){

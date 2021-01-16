@@ -2,6 +2,16 @@
     "name": "Instagram Feed",
     "description": "Instagram Feed Component",
     "group": "commerce_assets",
-    "attribute_definition_groups": [],
+    "attribute_definition_groups": [ {
+        "id": "displayInformation",
+        "name": "General Information",
+        "attribute_definitions": [
+          {
+            "id": "instaTitle",
+            "name": "Title",
+            "type": "string",
+            "required": false
+          }]
+    }],
     "region_definitions": []
 }

@@ -2,8 +2,6 @@
 
 var Template = require('dw/util/Template');
 var HashMap = require('dw/util/HashMap');
-var YouTubeService = require('~/cartridge/services/youtubeService');
-var Site = require('dw/system/Site');
 
 /**
  * Render logic for the YouTube component
@@ -13,46 +11,58 @@ var Site = require('dw/system/Site');
 module.exports.render = function(context) {
     var content = context.content;
     var type = content.dataType;
+    var height = content.setHeight;
+    var width = content.setWidth;
+    var autoplay = content.isAutoplay;
+    var loop = content.isLoop;
+    var controls = content.isControls;
+    var fullSize = content.isFullSize;
+
     var model = new HashMap();
 
-    var apiKey = Site.current.getCustomPreferenceValue('youtubeApiKey');
-
     model.title = content.sectionTitle;
-    model.subtitle = content.sectionSubtitle;
+    model.subTitle = content.sectionSubtitle;
     model.type = type;
 
-    var args = new dw.util.HashMap();
-    args.put('part', 'player');
-    args.put('key', apiKey);
-    var response;
-    var returnData;
+    var iframeOpen = '<iframe id="ytplayer" type="text/html" ';
+    var iframeFullResponsive;
+    if (fullSize == true){
+        iframeFullResponsive = 'class="embed-responsive-item"';
+    } 
+    var iframeWidth = 'width="'+ width +'" ';
+    var iframeHeight = 'height="'+ height +'" ';
+
+    var iframeSrc = "https://www.youtube.com/embed";
+    var iframeCore;
+
+    if (autoplay){
+        autoplay = 'autoplay=1&';
+    } else {
+        autoplay = 'autoplay=0&';
+    }
+    if (controls){
+        controls = 'controls=1&';
+    } else {
+        controls = 'controls=0&';
+    }
+    if (loop){
+        loop = 'loop=1"';
+    } else {
+        loop = 'loop=0"';
+    }
+
+    var iframeClose = ' frameborder="0"></iframe>';
 
     if (type == 'video') {
-        args.put('id', content.videoID);
-        returnData = YouTubeService.getVideo.call(args);
+        iframeCore = '/'+content.videoID.trim()+'?';
     } else {
-        args.put('channelID', content.channelID);
-        returnData = YouTubeService.getPlaylist.call(args);
+        iframeCore = '?listType=playlist&list='+content.playlistID.trim()+'&';
     }
 
-    if (returnData.isOk()) {
-        response = returnData.object;
-    } else {
-        response = 'error';
-        Logger.error('Error calling service');
-        return;
-    }
-
-    var videoItems = response.items;
-    var videoDisplay = [];
-
-    Object.keys(videoItems).forEach(function(key) {
-        videoDisplay.push({
-            video: videoItems[key].player.embedHtml
-        });
-    });
+    var videoDisplay = iframeOpen+iframeFullResponsive+iframeWidth+iframeHeight+' src="'+iframeSrc+iframeCore+autoplay+controls+loop+iframeClose;
 
     model.videos = videoDisplay;
+    model.responsive = fullSize;
 
     return new Template('experience/components/commerce_assets/youtube').render(model).text;
 };

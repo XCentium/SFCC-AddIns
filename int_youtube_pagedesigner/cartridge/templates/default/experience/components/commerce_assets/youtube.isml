@@ -1,18 +1,19 @@
     <div class='col-12'>
-        <div class="feedTitle">
+        <h2 class="feedTitle">
             ${pdict.title}
-        </div>
+        </h2>
     </div>
     <isif condition="${pdict.subTitle}">
         <div class='col-12'>
-            <div class="feedSubtitle">
+            <h3 class="feedSubtitle">
                 ${pdict.subTitle}
-            </div>
+            </h3>
         </div>
     </isif>
 
     <div class='col-sm-12 main'>
-        <isloop items="${pdict.videos}" status="loopcount" end="0" var="video">
-            <isprint value="${video.video}" encoding="off" />
-        </isloop>
+        <div class="<isif condition="${pdict.responsive}">embed-responsive embed-responsive-16by9</isif>">
+            <isprint value="${pdict.videos}" encoding="off" />
+        </div>
     </div>
+

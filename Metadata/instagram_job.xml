@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="InstagramFeed" priority="0">
+        <description>Gets Instagram media for Page Designer Component</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="getMedia" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_instagram_component/cartridge/scripts/jobs/InstagramFeed.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">getInstagramPosts</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2019-05-30Z</date-from>
+                    <start-time>04:00:00.000Z</start-time>
+                    <interval>12h</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+</jobs>
